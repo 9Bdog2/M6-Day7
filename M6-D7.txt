@@ -1,1 +1,51 @@
 MongoDb
+
+Mongoose (Schemas and CRUD)
+Mongo Queries
+
+BSON -aditional fields
+
+Mongoose Schema 
+Mongoose Model
+
+Monsgoose CRUD
+Create, .save()
+ Read, .find() /.findOne() / .findById()
+Update, 
+Delete
+
+npm i mongoose // comes with mongoDB
+
+import mongoose 
+
+mongoose.connect(process.env.MONGO_CONNECTION)
+
+mongoose.connection.on("connected", ()=>{
+server.listen(port. ()=>{
+		
+	})
+})
+
+create Services/users
+
+schema.js
+const {Schema, model} = mongoose
+const UserSchema = new Schema()
+
+export default model("User", userSchema)
+
+model// functionalities
+
+CRUD implementation 
+
+.put // const UpdatedUser = await UserModel.findByIdAndUpdate(id, req.body, {new : true})
+
+Exercise
+1.{isActive : true} // 51
+2.{age : {$gt:26}} // 54
+3.{age :  {$gt:26, $lte: 30}} // 19
+4.{ $or: [ { eyeColor: "brown" }, { eyeColor:"blue" }  ] }//66
+5.{ $nor: [ { eyeColor: "green" }  ] } // 66
+6.{ $nor: [ { eyeColor: "green" }, {eyeColor : "blue"}  ] }//35
+7.{company : "FITCORE"} // {email : 1} {id : 0} // 1
+
