@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema(
+const blogPostsSchema  = new Schema(
   {
     category: {
       type: String,
@@ -54,4 +54,4 @@ const userSchema = new Schema(
   }
 );
 
-export default model("User", userSchema);
+export default model("BlogPost", blogPostsSchema);

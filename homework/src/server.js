@@ -7,7 +7,8 @@ import {
   badRequestHandler,
   genericErrorHandler,
 } from "./errorHandlers.js";
-import userSchema from "./services/users/schema.js";
+/* import blogPostsSchema from "./services/users/schema.js"; */
+import blogRouter from "./services/users/index.js";
 
 const server = express();
 const port = process.env.PORT || 3001;
@@ -15,7 +16,7 @@ const port = process.env.PORT || 3001;
 server.use(cors());
 server.use(express.json());
 // ********************************* ROUTES ***************************************
-server.use("/users", userSchema);
+server.use("/blog", blogRouter);
 // ********************************* ERROR HANDLERS ***************************************
 
 server.use(notFoundHandler);
@@ -29,7 +30,6 @@ mongoose.connection.on("connected", () => {
 
   server.listen(port, () => {
     console.log(listEndpoints(server));
-
     console.log(`Server is running on port ${port}`);
   });
 });

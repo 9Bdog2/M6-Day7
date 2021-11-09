@@ -1,51 +1,69 @@
 import express from "express";
 import createHttpError from "http-errors";
-import userSchema from "../../models/user/schema.js";
+import blogPostsSchema from "./schema.js";
 
-const userRouter = express.Router();
+const blogRouter = express.Router();
 
-userRouter.get("/", async (req, res, next) => {
+blogRouter.get("/", async (req, res, next) => {
   try {
-    const users = await userSchema.find({});
-    res.json(users);
+    const users = await blogPostsSchema.find();
+    res.send(users);
   } catch (err) {
     next(err);
   }
 });
 
-userRouter.get("/:userId", async (req, res, next) => {
+blogRouter.get("/:userId", async (req, res, next) => {
   try {
-    const user = await userSchema.findById(req.params.userId);
+    const user = await blogPostsSchema.findById(req.params.userId);
     if (!user) {
       throw createHttpError(404, "User not found");
     }
-    res.json(user);
+    res.send(user);
   } catch (err) {
     next(err);
   }
 });
 
-userRouter.post("/", async (req, res, next) => {
+blogRouter.post("/", async (req, res, next) => {
   try {
-    const user = await userSchema.create(req.body);
-    res.json(user);
+    const newUser = new blogPostsSchema(req.body);
+    const { _id } = await newUser.save();
+    res.status(201).json({ _id });
   } catch (err) {
     next(err);
   }
 });
 
-userRouter.put("/:userId", async (req, res, next) => {
+blogRouter.put("/:userId", async (req, res, next) => {
   try {
-    const user = await userSchema.findByIdAndUpdate(req.params.userId, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const user = await blogPostsSchema.findByIdAndUpdate(
+      req.params.userId,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     if (!user) {
       throw createHttpError(404, "User not found");
     }
-    res.json(user);
+    res.send(user);
   } catch (err) {
     next(err);
   }
+});
 
+blogRouter.delete("/:userId", async (req, res, next) => {
+  try {
+    const user = await blogPostsSchema.findByIdAndDelete(req.params.userId);
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
+export default blogRouter;
