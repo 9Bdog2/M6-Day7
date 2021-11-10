@@ -7,7 +7,6 @@ import {
   badRequestHandler,
   genericErrorHandler,
 } from "./errorHandlers.js";
-/* import blogPostsSchema from "./services/users/schema.js"; */
 import blogRouter from "./services/users/index.js";
 
 const server = express();
