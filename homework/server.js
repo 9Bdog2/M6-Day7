@@ -20,7 +20,7 @@ server.use("/blog", blogRouter);
 
 server.use(notFoundHandler);
 server.use(badRequestHandler);
-server.use(genericErrorHandler);
+/* server.use(genericErrorHandler); */
 
 mongoose.connect(process.env.MONGO_CONNECTION);
 

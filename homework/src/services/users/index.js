@@ -29,7 +29,7 @@ blogRouter.post("/", async (req, res, next) => {
   try {
     const newUser = new blogPostsSchema(req.body);
     const { _id } = await newUser.save();
-    res.status(201).json({ _id });
+    res.status(201).send({ _id });
   } catch (err) {
     next(err);
   }
@@ -60,11 +60,10 @@ blogRouter.delete("/:userId", async (req, res, next) => {
     if (!user) {
       throw createHttpError(404, "User not found");
     }
-    res.send(user);
+    res.status(202).send({ message: "User deleted" });
   } catch (err) {
     next(err);
   }
 });
-
 
 export default blogRouter;
